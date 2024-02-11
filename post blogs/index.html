@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Blog Website</title>
+        <style>
+            body {
+                font-family: "Arial", sans-serif;
+                margin: 0;
+                padding: 0;
+                color: #333;
+                transition: background-color 0.3s ease-in-out,
+                    color 0.3s ease-in-out;
+            }
+
+            #header {
+                background-color: #2c3e50;
+                color: #ecf0f1;
+                padding: 20px;
+                text-align: center;
+                font-size: 24px;
+                letter-spacing: 2px;
+            }
+
+            #main-content {
+                max-width: 800px;
+                margin: 20px auto;
+                padding: 20px;
+                background-color: #ecf0f1;
+                border-radius: 12px;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+                transition: background-color 0.3s ease-in-out;
+            }
+
+            #post-form {
+                margin-bottom: 20px;
+            }
+
+            #post-form textarea {
+                width: 100%;
+                padding: 15px;
+                border: 1px solid #bdc3c7;
+                border-radius: 8px;
+                box-sizing: border-box;
+                margin-bottom: 10px;
+                font-size: 16px;
+                outline: none;
+                transition: background-color 0.3s ease-in-out,
+                    color 0.3s ease-in-out;
+            }
+
+            #post-form button {
+                background-color: #3498db;
+                color: #fff;
+                padding: 15px 30px;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 18px;
+                transition: background-color 0.3s ease-in-out;
+            }
+
+            #post-form button:hover {
+                background-color: #2980b9;
+            }
+
+            .post {
+                border-bottom: 1px solid #bdc3c7;
+                padding: 20px 0;
+                background-color: #fff;
+                border-radius: 8px;
+                transition: background-color 0.3s ease-in-out;
+                padding-left: 1rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .post-content {
+                margin-bottom: 10px;
+                font-size: 16px;
+            }
+
+            .post-user {
+                font-weight: bold;
+                color: #3498db;
+                cursor: pointer;
+                font-size: 18px;
+                text-decoration: underline;
+                transition: color 0.3s ease-in-out;
+            }
+
+            .post-user:hover {
+                color: #2980b9;
+            }
+
+            #theme-toggle {
+                background-color: #3498db;
+                color: #fff;
+                padding: 10px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                margin-bottom: 10px;
+                transition: background-color 0.3s ease-in-out;
+            }
+
+            #theme-toggle:hover {
+                background-color: #2980b9;
+            }
+
+            /* Dark Theme */
+            body.dark-mode {
+                background-color: #2c3e50;
+                color: #ecf0f1;
+            }
+
+            body.dark-mode #main-content {
+                background-color: #34495e;
+            }
+
+            body.dark-mode #post-form textarea {
+                background-color: #2c3e50;
+                color: #ecf0f1;
+                border: 1px solid #2c3e50;
+            }
+
+            body.dark-mode .post {
+                background-color: #34495e;
+                border: 1px solid #2c3e50;
+            }
+
+            body.dark-mode .post-user {
+                color: #3498db;
+            }
+
+            body.dark-mode #theme-toggle {
+                background-color: #3498db;
+                color: #fff;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="header">
+            <h1>Blog Website</h1>
+            <button id="theme-toggle" onclick="toggleTheme()">
+                Toggle Theme
+            </button>
+        </div>
+
+        <div id="main-content">
+            <div id="post-form">
+                <input
+                    type="text"
+                    id="post-username"
+                    value="me"
+                    readonly
+                    hidden
+                />
+                <textarea
+                    id="post-text"
+                    placeholder="Share your thoughts..."
+                ></textarea>
+                <button onclick="createPost()">Post</button>
+            </div>
+
+            <div id="post-feed">
+                <!-- Existing posts and future posts will be displayed here -->
+                <div class="post">
+                    <div
+                        class="post-user"
+                        onclick="openUserDetailsPopup('Jane Smith')"
+                    >
+                        Jane Smith
+                    </div>
+                    <div class="post-content">
+                        Just published my first blog post! 🚀
+                    </div>
+                </div>
+                <div class="post">
+                    <div
+                        class="post-user"
+                        onclick="openUserDetailsPopup('Bob Johnson')"
+                    >
+                        Bob Johnson
+                    </div>
+                    <div class="post-content">
+                        Exploring new ideas in technology. 💡
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function createPost() {
+                const postUsername =
+                    document.getElementById("post-username").value;
+                const postText = document.getElementById("post-text").value;
+
+                if (postUsername.trim() !== "" && postText.trim() !== "") {
+                    const postFeed = document.getElementById("post-feed");
+
+                    // Create a new post element
+                    const newPost = document.createElement("div");
+                    newPost.className = "post";
+
+                    // Create post user element
+                    const postUser = document.createElement("div");
+                    postUser.className = "post-user";
+                    postUser.innerText = postUsername;
+                    postUser.onclick = function () {
+                        openUserDetailsPopup(postUsername);
+                    };
+
+                    // Create post content element
+                    const postContent = document.createElement("div");
+                    postContent.className = "post-content";
+                    postContent.innerText = postText;
+
+                    // Append post user and content to the new post element
+                    newPost.appendChild(postUser);
+                    newPost.appendChild(postContent);
+
+                    // Append the new post to the post feed
+                    postFeed.insertBefore(newPost, postFeed.firstChild);
+
+                    // Clear the textarea after posting
+                    document.getElementById("post-text").value = "";
+                }
+            }
+
+            function openUserDetailsPopup(username) {
+                // For simplicity, using static data. You can fetch user details from your database.
+                const userDetails = {
+                    name: username,
+                    // Add more user details as needed
+                };
+
+                // You can display the user details in a modal or navigate to a user profile page.
+                alert(`User Details\nName: ${userDetails.name}`);
+            }
+
+            function toggleTheme() {
+                document.body.classList.toggle("dark-mode");
+            }
+        </script>
+    </body>
+</html>

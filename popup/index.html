@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Social Media Home</title>
+        <style>
+            body {
+                font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f0f0f0;
+                color: #333;
+            }
+
+            #header {
+                background-color: #4267b2;
+                color: #fff;
+                padding: 10px;
+                text-align: center;
+            }
+
+            #main-content {
+                max-width: 800px;
+                margin: 20px auto;
+                padding: 20px;
+                background-color: #fff;
+                border-radius: 8px;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            }
+
+            #profile-section {
+                text-align: center;
+            }
+
+            #profile-image {
+                width: 150px;
+                height: 150px;
+                border-radius: 50%;
+                margin-bottom: 10px;
+            }
+
+            #profile-name {
+                font-size: 1.5rem;
+                font-weight: bold;
+            }
+
+            #profile-bio {
+                font-size: 1rem;
+                margin-bottom: 20px;
+            }
+
+            #post-form {
+                border-top: 1px solid #ccc;
+                margin-top: 20px;
+                padding-top: 20px;
+            }
+
+            #post-form textarea {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                box-sizing: border-box;
+                margin-bottom: 10px;
+            }
+
+            #post-form button {
+                background-color: #4267b2;
+                color: #fff;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            #post-feed {
+                margin-top: 20px;
+            }
+
+            .post {
+                border-bottom: 1px solid #ccc;
+                padding: 10px 0;
+            }
+
+            .post-content {
+                margin-bottom: 10px;
+            }
+
+            .post-user {
+                font-weight: bold;
+                color: #4267b2;
+                cursor: pointer;
+            }
+
+            #more-options-popup,
+            #user-details-popup {
+                display: none;
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+                z-index: 999;
+                max-width: 400px;
+                width: 100%;
+                text-align: center;
+            }
+
+            #more-options-popup h2,
+            #user-details-popup h2 {
+                margin-bottom: 20px;
+                color: #333;
+            }
+
+            #close-popup-btn,
+            #close-user-popup-btn {
+                background-color: #4267b2;
+                color: #fff;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            #more-options-btn {
+                background-color: #34495e;
+                color: #fff;
+                padding: 10px 15px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 1rem;
+            }
+
+            #more-options-content,
+            #user-details-content {
+                font-size: 1.2rem;
+                color: #333;
+            }
+
+            #more-options-content p,
+            #user-details-content p {
+                margin-bottom: 10px;
+            }
+
+            #more-options-content h3,
+            #user-details-content h3 {
+                color: #4267b2;
+                margin-bottom: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="header">
+            <h1>WIS Media</h1>
+        </div>
+
+        <div id="main-content">
+            <div id="profile-section">
+                <img id="profile-image" src="man.png" alt="Profile Image" />
+                <div id="profile-name">John Doe</div>
+                <div id="profile-bio">Web Developer | Travel Enthusiast</div>
+                <button id="more-options-btn" onclick="openMoreOptions()">
+                    More Options
+                </button>
+            </div>
+
+            <div id="post-form">
+                <textarea placeholder="What's on your mind?"></textarea>
+                <button>Post</button>
+            </div>
+
+            <div id="post-feed">
+                <div class="post">
+                    <div
+                        class="post-user"
+                        onclick="openUserDetailsPopup('Jane Smith')"
+                    >
+                        Jane Smith
+                    </div>
+                    <div class="post-content">
+                        Just visited a beautiful place! 🌍
+                    </div>
+                </div>
+
+                <div class="post">
+                    <div
+                        class="post-user"
+                        onclick="openUserDetailsPopup('Bob Johnson')"
+                    >
+                        Bob Johnson
+                    </div>
+                    <div class="post-content">
+                        Coding all day! 💻 #DeveloperLife
+                    </div>
+                </div>
+
+                <!-- Add more posts as needed -->
+            </div>
+        </div>
+
+        <!-- More Options Popup -->
+        <div id="more-options-popup">
+            <h2>More Options</h2>
+            <div id="more-options-content">
+                <p>Edit Profile</p>
+                <p>Change Settings</p>
+                <!-- Add more meaningful options as needed -->
+            </div>
+            <button id="close-popup-btn" onclick="closeMoreOptions()">
+                Close
+            </button>
+        </div>
+
+        <!-- User Details Popup -->
+        <div id="user-details-popup">
+            <h2>User Details</h2>
+            <div id="user-details-content">
+                <h3>Full Name</h3>
+                <p id="user-details-name">Jane Smith</p>
+                <h3>Address</h3>
+                <p id="user-details-address">123 Main St, Cityville</p>
+                <h3>Birthdate</h3>
+                <p id="user-details-birthdate">January 1, 1990</p>
+                <h3>Friends</h3>
+                <p id="user-details-friends">John Doe, Bob Johnson</p>
+                <h3>Interests</h3>
+                <p id="user-details-interests">Travel, Coding, Photography</p>
+            </div>
+            <button id="close-user-popup-btn" onclick="closeUserDetailsPopup()">
+                Close
+            </button>
+        </div>
+
+        <script>
+            function openMoreOptions() {
+                document.getElementById("more-options-popup").style.display =
+                    "block";
+            }
+
+            function closeMoreOptions() {
+                document.getElementById("more-options-popup").style.display =
+                    "none";
+            }
+
+            function openUserDetailsPopup(username) {
+                const userDetails = {
+                    name: username,
+                    address: "123 Main St, Cityville",
+                    birthdate: "January 1, 1990",
+                    friends: "John Doe, Bob Johnson",
+                    interests: "Travel, Coding, Photography",
+                };
+
+                document.getElementById("user-details-name").innerText =
+                    userDetails.name;
+                document.getElementById("user-details-address").innerText =
+                    userDetails.address;
+                document.getElementById("user-details-birthdate").innerText =
+                    userDetails.birthdate;
+                document.getElementById("user-details-friends").innerText =
+                    userDetails.friends;
+                document.getElementById("user-details-interests").innerText =
+                    userDetails.interests;
+
+                document.getElementById("user-details-popup").style.display =
+                    "block";
+            }
+
+            function closeUserDetailsPopup() {
+                document.getElementById("user-details-popup").style.display =
+                    "none";
+            }
+        </script>
+    </body>
+</html>
