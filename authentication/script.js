@@ -23,7 +23,7 @@ function login() {
 
     // Add your actual login logic here
     // For simplicity, let's assume any non-empty credentials are valid
-    if (username && password) {
+    if (username === "user1" && password === "password1") {
         // Redirect to the dashboard page after successful login
         window.location.href = "dashboard.html";
     } else {

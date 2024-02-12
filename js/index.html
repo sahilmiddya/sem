@@ -7,9 +7,18 @@
         <link rel="stylesheet" href="style.css" />
     </head>
     <body>
-        <h1>hey!!</h1>
+        <body>
+            <h1>This is a title</h1>
+            <button>Change title</button>
+            <script>
+                var title = document.querySelector("h1");
+                var btn = document.querySelector("button");
 
-        <button class="btn-title">Change title</button>
+                btn.addEventListener("click", () => {
+                    title.innerHTML = "This is another title";
+                });
+            </script>
+        </body>
     </body>
-    <script src="script.js"></script>
+    <!-- <script src="script.js"></script> -->
 </html>
